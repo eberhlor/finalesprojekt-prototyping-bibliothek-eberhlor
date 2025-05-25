@@ -3,7 +3,7 @@ export async function load() {
         const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
             method: 'GET',
             headers: {
-                'X-Api-Key': 'oN8kjh7eCIF9PKSHhx6Szg==mhQJLHBmVaAOtAIl',
+                'X-Api-Key': '',
                 'Content-Type': 'application/json'
             }
         });
