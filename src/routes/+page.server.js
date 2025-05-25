@@ -1,6 +1,6 @@
 export async function load() {
     try {
-        const response = await fetch('https://api.api-ninjas.com/v1/quotes100', {
+        const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
             method: 'GET',
             headers: {
                 'X-Api-Key': 'oN8kjh7eCIF9PKSHhx6Szg==mhQJLHBmVaAOtAIl',
