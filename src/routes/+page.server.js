@@ -1,9 +1,11 @@
+import { API_KEY } from "$env/static/private";
+
 export async function load() {
     try {
         const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
             method: 'GET',
             headers: {
-                'X-Api-Key': '',
+                'X-Api-Key': API_KEY,
                 'Content-Type': 'application/json'
             }
         });
