@@ -1,0 +1,21 @@
+export async function load() {
+    try {
+        const response = await fetch('https://api.api-ninjas.com/v1/quotes100', {
+            method: 'GET',
+            headers: {
+                'X-Api-Key': 'oN8kjh7eCIF9PKSHhx6Szg==mhQJLHBmVaAOtAIl',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        return {
+            quotes: data
+        };
+    } catch (error) {
+        console.error('Fetch error:', error.message);
+        return {
+            quotes: [],
+            error: error.message
+        };
+    }
+}

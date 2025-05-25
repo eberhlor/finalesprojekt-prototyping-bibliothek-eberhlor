@@ -1,0 +1,22 @@
+footer {
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+#body{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#detailImg{
+  height: 25%;
+  width: 15%;
+}
+#link{
+    color: white;
+    text-decoration: none;
+}
+.centered-card{
+  width: 30%;
+  
+}
