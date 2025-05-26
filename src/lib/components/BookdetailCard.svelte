@@ -1,4 +1,5 @@
 <script>
+import { BookText, SquareUserRound } from 'lucide-svelte';
 let { book } = $props();
 console.log(book)
 </script>
@@ -10,16 +11,16 @@ console.log(book)
                     <h5> {book.title}</h5>
                 </div>
                 <div>
-                    Jahr: {book.year}
+                    <BookText /> Jahr: {book.year}
                 </div>
                 <div>
-                    Anzahl Seiten: {book.length}
+                    <BookText /> Anzahl Seiten: {book.length}
                 </div>
                 <div>
-                    Genre: {book.book_genre}
+                    <BookText /> Genre: {book.book_genre}
                 </div>
                 <div>
-                    Author: {book.book_author_firstname} {book.book_author_lastname}
+                    <SquareUserRound /> Author: {book.book_author_firstname} {book.book_author_lastname}
                 </div>
             </div>
 </div>

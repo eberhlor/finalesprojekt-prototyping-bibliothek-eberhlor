@@ -1,5 +1,5 @@
 <script>
-
+  import { CircleChevronRight } from 'lucide-svelte';
   let{data} = $props()
   let selectedGender = $state()
 
@@ -39,8 +39,8 @@
            <div class="card">
                 <div class="card-body">
                         <h5 class="modal-title">{author.firstname} {author.lastname}</h5>
-                        <p>{formatDate(author.birthdate)} <br> {author.gender} </p>
-                        <p></p>
+                        <p> <CircleChevronRight size={16} color="blue" /> {formatDate(author.birthdate)} <br> <CircleChevronRight size={16} color="blue" /> {author.gender} </p>
+                        <button class="btn btn-primary"><a id="link" href="/authors/{author._id}">Books</a></button>
                         
                 </div>
             </div>

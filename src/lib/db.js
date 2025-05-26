@@ -60,16 +60,29 @@ async function createBook(book) {
   return null;
 }
 
+async function countAuthor() {
+
+  try {
+    const collection = db.collection("authors");
+    const result = await collection.countDocuments({});
+    return result; 
+  } catch (error) {
+    // TODO: errorhandling
+    console.log(error.message);
+  }
+  return 0;
+
+}
+
 async function createAuthor(author) {
-  const authors = await getAuthors();
-  const numberOfAuthors = authors.length;
+  const authorsCount = await countAuthor();
   const date = new Date(author.birthdate);
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
      
   author.birthdate = `${month}/${day}/${year}`;
-  author.authorId = numberOfAuthors +1;
+  author.authorId = authorsCount +1;
  
   try {
     const collection = db.collection("authors");
@@ -141,7 +154,7 @@ async function getAuthor(id) {
   }
   return author;
 }
-
+//wird nicht mehr benutzt ist ein simpler weg an die Bücher zu kommen
 async function getBooksOfGenre(id) {
   let books = [];
   try {
@@ -171,7 +184,7 @@ const query =  [{
         $lookup: {
           from: 'genres',
           localField: 'genreId',
-          foreignField: '_id',
+          foreignField: 'genreId',
           as: 'book_genre'
         }
       },
@@ -213,47 +226,88 @@ const query =  [{
   return books;
 
 }
-
+//alternative zu getBooksOfGenre
 async function getBooksByGenre(id) {
-  let genres = [];
+  let books = [];
   try {
     const collection = db.collection("genres");
     console.log(id)
 
 const query =  [{
-        $match: { '_id': Number(id) } // nur dieses Genre
+        $match: { '_id': new ObjectId(id) } // nur dieses Buch
       },
       {
-        $lookup: {
-            from: 'books', 
-            localField: '_id', 
-            foreignField: 'genreId', 
-            as: 'books_of_genre'
+        '$lookup': {
+            'from': 'books', 
+            'localField': 'genreId', 
+            'foreignField': 'genreId', 
+            'as': 'books'
         }
     }, {
-        $project: { 
-            books_of_genre: {
-                $map: {
-                    input: '$books_of_genre', 
-                    as: 'book', 
-                    in: {
-                        title: '$$book.title', 
-                        year: '$$book.year', 
-                        poster: '$$book.poster', 
-                        length: '$$book.length'
-                    }
-                }
-            }
+        '$unwind': {
+            'path': '$books'
         }
-      }
+    }, {
+        '$project': {
+            '_id': 1,
+            'title': '$books.title', 
+            'year': '$books.year', 
+            'length': '$books.length', 
+            'poster': '$books.poster'
+        }
+    }
     ];
-    genres = await collection.aggregate(query).toArray();
+    books = await collection.aggregate(query).toArray();
+    books.forEach((book) => {
+        book._id = book._id.toString();
+      });
 
 
   } catch (error) {
     console.log(error.message);
   }
-  return genres;
+  return books;
+
+}
+
+async function getBooksByAuthor(id) {
+  let books = [];
+  try {
+    const collection = db.collection("authors");
+
+const query =  [{
+        $match: { '_id': new ObjectId(id) } // nur dieses Buch
+      },
+      {
+        '$lookup': {
+            'from': 'books', 
+            'localField': 'authorId', 
+            'foreignField': 'authorId', 
+            'as': 'books'
+        }
+    }, {
+        '$unwind': {
+            'path': '$books'
+        }
+    }, {
+        '$project': {
+            '_id': 1,
+            'title': '$books.title', 
+            'year': '$books.year', 
+            'length': '$books.length', 
+            'poster': '$books.poster'
+        }
+    }
+    ];
+    books = await collection.aggregate(query).toArray();
+
+      books.forEach((book) => {
+        book._id = book._id.toString();
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
+  return books;
 
 }
 
@@ -270,5 +324,6 @@ export default {
   getAuthor,
   getBookDetailInfo,
   getBooksByGenre,
-  createAuthor
+  createAuthor,
+  getBooksByAuthor
 };

@@ -1,18 +1,22 @@
-  <br>
+<script>
+  import { CircleChevronRight } from 'lucide-svelte';
+</script>
+<br>
 <h2>Impressum</h2>
   <p><strong>Angaben gemäß § 3 Abs. 1 lit. s UWG (Schweiz)</strong></p>
   <p>
-    Luca Meier<br>
-    Weinbergstrasse 123<br>
-    8006 Zürich<br>
-    Schweiz
+     Luca Meier<br>
+     Weinbergstrasse 123<br>
+     8006 Zürich<br>
+     Schweiz
+
   </p>
   <p>
     E-Mail: <a href="mailto:luca@buecherwelt.ch">luca@buecherwelt.ch</a>
   </p>
   <br>
   <p>
-    Dies ist eine private, nicht-kommerzielle Webseite über meine Lieblingsbücher. Die Inhalte dienen rein persönlichen Zwecken und stellen keine geschäftliche Tätigkeit dar.
+    <CircleChevronRight size={16} color="blue" /> Dies ist eine private, nicht-kommerzielle Webseite über meine Lieblingsbücher. Die Inhalte dienen rein persönlichen Zwecken und stellen keine geschäftliche Tätigkeit dar.
   </p>
   <br>
   <p>

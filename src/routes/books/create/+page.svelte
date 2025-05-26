@@ -2,7 +2,7 @@
     let {data} = $props()
 </script>
 <div class="col-auto mb-3">
-    <button type="button" class="btn btn-secondary"><a id="link" href="/authors">Back</a></button>    
+    <button type="button" class="btn btn-secondary"><a id="link" href="/books">Back</a></button>    
 </div>
 <h1>Add a Book</h1>
 
@@ -24,7 +24,7 @@
         <select name="genre_id" class="form-select" required>
           <option selected disabled>Select a genre</option>
             {#each data.genres as genre}
-              <option value={genre._id}>{genre.name}</option>
+              <option value={genre.genreId}>{genre.name}</option>
             {/each}
         </select>
     </div>
@@ -33,7 +33,7 @@
         <select name="author_id" class="form-select" required>
           <option selected disabled>Select a author</option>
             {#each data.authors as author}
-              <option value={author._id}>{author.firstname}-{author.lastname}</option>
+              <option value={author.authorId}>{author.firstname} {author.lastname}</option>
             {/each}
         </select>
     </div>
