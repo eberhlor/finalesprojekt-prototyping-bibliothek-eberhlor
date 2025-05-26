@@ -2,9 +2,11 @@
     let selectedGender = $state()
 </script>
 <div class="col-auto mb-3">
-    <button type="button" class="btn btn-secondary"><a id="link" href="/authors">Back</a></button>    
-</div>
+  <button type="button" class="btn btn-secondary"><a id="link" href="/authors">Back</a></button>
+</div>  
 <h1>Add a Author</h1>
+<br>
+
 
 <form method="POST" action="?/create">
     <div class="mb-3">
@@ -27,6 +29,10 @@
             <option value="Female">Female</option>
         </select>
     </div>
+    <div class="mb-3"> 
+      <button type="submit" class="btn btn-success"> Add Author </button>
+    </div>
     <br>
-    <button type="submit" class="btn btn-success"> Add Author </button>
+    
+    <br>
   </form>
